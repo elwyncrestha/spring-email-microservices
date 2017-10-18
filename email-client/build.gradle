@@ -2,7 +2,6 @@ buildscript {
 	ext {
 		kotlinVersion = '1.1.51'
 		springBootVersion = '2.0.0.M3'
-        sendgridVersion = '4.0.1'
 	}
 	repositories {
 		mavenCentral()
@@ -47,17 +46,16 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-actuator')
 	compile('org.springframework.cloud:spring-cloud-starter-config')
 	compile('org.springframework.cloud:spring-cloud-starter-netflix-eureka-client')
+	compile('org.springframework.cloud:spring-cloud-starter-openfeign')
+	compile('org.springframework.cloud:spring-cloud-starter-netflix-hystrix')
+	compile('org.springframework.cloud:spring-cloud-starter-oauth2')
 //	compile('org.springframework.cloud:spring-cloud-starter-zipkin') // zipkin server needed
 	compile('org.springframework.cloud:spring-cloud-starter-stream-rabbit')
+	compile('org.springframework.cloud:spring-cloud-starter-netflix-zuul')
+	compile('org.springframework.boot:spring-boot-starter-hateoas')
 	compile('org.springframework.boot:spring-boot-starter-webflux')
-
 	compile("org.jetbrains.kotlin:kotlin-stdlib-jre8:${kotlinVersion}")
 	compile("org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}")
-    // send grid
-    compile ("com.sendgrid:sendgrid-java:${sendgridVersion}")
-
-
-	runtime('com.h2database:h2')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 	testCompile('io.projectreactor:reactor-test')
 }
