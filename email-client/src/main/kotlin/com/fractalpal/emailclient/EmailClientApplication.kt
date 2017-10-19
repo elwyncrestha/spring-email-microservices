@@ -23,8 +23,6 @@ import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.context.request.RequestContextListener
 
 
-
-//@EnableOAuth2Sso // for browser based auth
 @IntegrationComponentScan
 @EnableBinding(EmailChannel::class)
 @EnableZuulProxy

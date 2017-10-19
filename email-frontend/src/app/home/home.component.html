@@ -1,0 +1,24 @@
+<form (submit)=send($event)>
+  <div id="error" class="error">
+    <label>{{hint_text}}</label>
+  </div>
+  <div class="input">
+    <label>From</label>
+    <input type="text">
+  </div>
+  <div class="input">
+    <label>To email</label>
+    <input type="text">
+  </div>
+  <div class="input">
+    <label>subject</label>
+    <input type="text">
+  </div>
+  <div class="input">
+    <label>message</label>
+    <input type="text">
+  </div>
+  <div class="input">
+    <input type="submit" value="send">
+  </div>
+</form>

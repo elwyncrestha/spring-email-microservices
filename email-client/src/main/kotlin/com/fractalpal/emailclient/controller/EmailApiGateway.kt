@@ -8,10 +8,7 @@ import com.fractalpal.emailclient.model.ResponseMessage
 import com.fractalpal.emailclient.model.SimpleEmail
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand
 import org.springframework.http.MediaType
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestMethod
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import reactor.core.publisher.Mono
 import reactor.core.publisher.toMono
 
@@ -31,7 +28,7 @@ class EmailApiGateway(private val emailSender: EmailSender,
         return Mono.just(GateWayResponse(ResponseMessage(ResponseMessage.CODE_MESSAGE_IN_QUEUE, ResponseMessage.MSG_FALLBACK)))
     }
 
-//    @PreAuthorize("hasAuthority('email_write')")
+    @CrossOrigin
     @HystrixCommand(fallbackMethod = "fallback")
     @RequestMapping(value = "/send",
             method = arrayOf(RequestMethod.POST),

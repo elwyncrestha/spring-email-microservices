@@ -8,6 +8,7 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Res
 import org.springframework.security.oauth2.provider.token.TokenStore
 import javax.servlet.http.HttpServletResponse
 
+
 @Configuration
 @EnableResourceServer
 class ResourceServerConfig(private val tokenStore: TokenStore) : ResourceServerConfigurerAdapter() {
@@ -19,8 +20,7 @@ class ResourceServerConfig(private val tokenStore: TokenStore) : ResourceServerC
 
     @Throws(Exception::class)
     override fun configure(http: HttpSecurity) {
-        http
-            .csrf().disable()
+        http.csrf().disable()
             .exceptionHandling()
             .authenticationEntryPoint({ request, response, authException -> response.sendError(HttpServletResponse.SC_UNAUTHORIZED) })
             .and()

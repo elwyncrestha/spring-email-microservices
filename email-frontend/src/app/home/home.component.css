@@ -1,0 +1,35 @@
+:host{
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.error{
+  padding: 10px 0;
+  color: #ff0000
+}
+
+div.input{
+  position:relative;
+  margin-top: 20px;
+}
+
+div.input label {
+  position: absolute;
+  top: 0;
+  transform: translateY(-50%);
+  left: 10px;
+  background: white;
+  padding: 5px 2px;
+}
+
+div.input input{
+  padding: 10px 20px;
+  font-size: 20px;
+  outline: 0;
+}
+
+div.input input[type=submit]{
+  width: 100px;
+}

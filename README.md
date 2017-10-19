@@ -1,9 +1,33 @@
 ## Spring Boot Email micro services demo
 
 This project use Spring Framework 5.0 (https://spring.io/) and is implemented using Kotlin language (https://kotlinlang.org/)
+Project is not completed (can't make it on time) but tried to focus on overall microservices architecure. I tried to experiment with newes Spring (first time accualy) that uses reactive web components (non-blocking). 
 
-For detail tracing we could use zipking for distributed tracing
+Overall architecture brief
 
+[clients-frontend(web/mobile/etc)] -> [email-client(architecture edge with micro proxy that handles oauth for downstream servers] -> [email-service(acctual downstream service)]
+
+[eureka service(for discovery] [config-service(remote configuration)] [auth-service(handles security)] [hystrix-dashboard (for monitoring)]
+
+For detail tracing we could use zipking for distributed tracing (not used in this demo, but possible)
+
+Frontent (client-frontend) is not completed. I used angualr and faced some CORS problems with reactive web (didn't have time to investigate more). More about this in detalis below.
+
+Project is not deployed anywhere. After completion I would use docker containers for microservices and deployed propably using Kubernetes
+
+All microservices are working so it is possible to run them on local machine and test using CURL/Postman
+
+Not all microservices has test and if -> not full covered. Best cover is in email-service
+
+Validation and proper error handlings are not implemented
+
+More details about system:
+
+## config-server
+This component provides configurations for microservices. To configre we need to setup git repository that will be used as a lookup.
+Example is https://github.com/brzostek/spring-microservices-config. After clone, we should set proper uri in application.properties
+spring.cloud.config.server.git.uri=/location/of/clonned/services/configs
+Should be running before other services to provide those configurations
 
 ### email-client
 This is a logical edge of the architecture. Responding to requests to actual clients like (html5,mobile,iot etc)
@@ -21,6 +45,8 @@ uses:
 tests:
 * just one test, not fully covered
 
+This use rabbitMQ in case of fail over of downstream email-service microservice. To use it https://www.rabbitmq.com/ need to be installed
+
 ## email-service
 This is underlaying email micro service that handle email sends. It uses Send Grid or Mail Gun (in cave Send Grid returns error) to handle emails messages.
 
@@ -31,9 +57,6 @@ uses:
 
 tests:
 * about 50-60% coverage just for demo
-
-## config-service
-This component provides configiration for our micro services. Enables hot/remote configuration
 
 ## eureka-service
 This component handles services registery for discovery
@@ -65,6 +88,9 @@ client_id:acme
 ## hystrix-dashboard
 This component allows to monitor our micro services (log streams). It exposes hystrix.stream at out edge
 
-
 ## client-frontned
-This should be an angualr app client frontend. Didn't have time to finished :/
+This should be an angular app client frontend. Didn't have time to finished :/. 
+Is it possible to run. login form is working because underlying auth-service not using reactive web, so CORS was easy to setup (not ideal i know).
+Email sending not working because of 401 on OPTIONS call from angular (CORS problem as said before).
+
+
