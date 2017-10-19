@@ -9,6 +9,8 @@ Overall architecture brief
 
 [eureka service(for discovery] [config-service(remote configuration)] [auth-service(handles security)] [hystrix-dashboard (for monitoring)]
 
+Actuator is using for services monitoring on (/application/health in each service context)
+
 For detail tracing we could use zipking for distributed tracing (not used in this demo, but possible)
 
 Frontent (client-frontend) is not completed. I used angualr and faced some CORS problems with reactive web (didn't have time to investigate more). More about this in detalis below.
@@ -23,7 +25,7 @@ Validation and proper error handlings are not implemented
 
 More details about system:
 
-## config-server
+### config-server
 This component provides configurations for microservices. To configre we need to setup git repository that will be used as a lookup.
 Example is https://github.com/brzostek/spring-microservices-config. After clone, we should set proper uri in application.properties
 spring.cloud.config.server.git.uri=/location/of/clonned/services/configs
@@ -40,7 +42,7 @@ uses:
 * rabbitMQ for (in case undelaying service is not available) delivering data to email service (eventually) 
 * feign for simpler rest client declaration 
 * hystrix for circuit breaker implementation that provides fallback in case of email service down (gracefull degradation)
-* actuator for service monitoring
+* actuator for service monitoring (/application/health)
 
 tests:
 * just one test, not fully covered
