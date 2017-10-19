@@ -56,17 +56,24 @@ uses:
 * eureka client for service discovery
 * cloud config for remote configs
 * actuator for service monitoring
+* secured by oauth2
 
 tests:
 * about 50-60% coverage just for demo
 
 ## eureka-service
 This component handles services registery for discovery
+* cloud config for remote configs
+* actuator for service monitoring
 
 ## auth-service
 This component handles oauth2 email-client protection. For now just email-client is protected, all communication between micro-services should be!
 It has resource server (this could/should be split to another service for resource authorization). No real authorization server, just mockuped users
 JWT enabled.
+
+* eureka client for service discovery
+* cloud config for remote configs
+* actuator for service monitoring
 
 uses /uaa context for oauth
 
@@ -89,6 +96,9 @@ client_id:acme
 
 ## hystrix-dashboard
 This component allows to monitor our micro services (log streams). It exposes hystrix.stream at out edge
+* eureka client for service discovery
+* cloud config for remote configs
+* actuator for service monitoring
 
 ## client-frontned
 This should be an angular app client frontend. Didn't have time to finished :/. 
