@@ -1,7 +1,7 @@
 ## Spring Boot Email micro services demo
 
-This project use Spring Framework 5.0 (https://spring.io/) and is implemented using Kotlin language (https://kotlinlang.org/)
-Project is not completed (can't make it on time) but tried to focus on overall microservices architecure. I tried to experiment with newes Spring (first time accualy) that uses reactive web components (non-blocking). 
+This project use Spring Framework 5.0 (https://spring.io/) and is implemented using Kotlin language (https://kotlinlang.org/) using gradle build system.
+Project is not completed (can't make it on time) but tried to focus on overall microservices architecure. I tried to experiment with newes Spring (first time accualy) that uses reactive web components (non-blocking I/O). 
 
 Overall architecture brief
 
@@ -49,7 +49,7 @@ tests:
 
 This use rabbitMQ in case of fail over of downstream email-service microservice. To use it https://www.rabbitmq.com/ need to be installed
 
-## email-service
+### email-service
 This is underlaying email micro service that handle email sends. It uses Send Grid or Mail Gun (in cave Send Grid returns error) to handle emails messages.
 
 uses:
@@ -61,12 +61,12 @@ uses:
 tests:
 * about 50-60% coverage just for demo
 
-## eureka-service
+### eureka-service
 This component handles services registery for discovery
 * cloud config for remote configs
 * actuator for service monitoring
 
-## auth-service
+### auth-service
 This component handles oauth2 email-client protection. For now just email-client is protected, all communication between micro-services should be!
 It has resource server (this could/should be split to another service for resource authorization). No real authorization server, just mockuped users
 JWT enabled.
@@ -94,13 +94,13 @@ scope:email
 client_secret:acmesecret
 client_id:acme
 
-## hystrix-dashboard
+### hystrix-dashboard
 This component allows to monitor our micro services (log streams). It exposes hystrix.stream at out edge
 * eureka client for service discovery
 * cloud config for remote configs
 * actuator for service monitoring
 
-## client-frontned
+### client-frontned
 This should be an angular app client frontend. Didn't have time to finished :/. 
 Is it possible to run. login form is working because underlying auth-service not using reactive web, so CORS was easy to setup (not ideal i know).
 Email sending not working because of 401 on OPTIONS call from angular (CORS problem as said before).
