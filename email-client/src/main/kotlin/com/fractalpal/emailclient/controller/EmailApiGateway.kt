@@ -16,7 +16,7 @@ import reactor.core.publisher.Mono
 import reactor.core.publisher.toMono
 
 @RestController
-@RequestMapping("/email")
+@RequestMapping("/api/email")
 /**
  * Email gateway client; architecture edge
  * Simplified with classes in single file etc - because it's demo
@@ -31,6 +31,7 @@ class EmailApiGateway(private val emailSender: EmailSender,
         return Mono.just(GateWayResponse(ResponseMessage(ResponseMessage.CODE_MESSAGE_IN_QUEUE, ResponseMessage.MSG_FALLBACK)))
     }
 
+//    @PreAuthorize("hasAuthority('email_write')")
     @HystrixCommand(fallbackMethod = "fallback")
     @RequestMapping(value = "/send",
             method = arrayOf(RequestMethod.POST),

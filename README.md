@@ -9,7 +9,7 @@ For detail tracing we could use zipking for distributed tracing
 This is a logical edge of the architecture. Responding to requests to actual clients like (html5,mobile,iot etc)
 
 uses:
-* zuulu micro proxy (reversed proxy) for setting routes for application based on services registered in service registery with client side load balancing
+* zuulu micro proxy (reversed proxy) for setting routes for application based on services registered in service registery with client side load balancing and oauth support
 * eureka client for service discovery
 * cloud config for remote configs
 * oauth2 for sercurity
@@ -40,7 +40,31 @@ This component handles services registery for discovery
 
 ## auth-service
 This component handles oauth2 email-client protection. For now just email-client is protected, all communication between micro-services should be!
+It has resource server (this could/should be split to another service for resource authorization). No real authorization server, just mockuped users
+JWT enabled.
+
+uses /uaa context for oauth
+
+for getting access token call /uaa/oauth/token
+clientId: acme
+clientSecret: acmesecret
+
+moked users[username/password]:
+* pbrzostowski/fractal
+* user/password
+
+example body:
+
+password:fractal
+username:pbrzostowski
+grant_type:password
+scope:email
+client_secret:acmesecret
+client_id:acme
 
 ## hystrix-dashboard
 This component allows to monitor our micro services (log streams). It exposes hystrix.stream at out edge
 
+
+## client-frontned
+This should be an angualr app client frontend. Didn't have time to finished :/

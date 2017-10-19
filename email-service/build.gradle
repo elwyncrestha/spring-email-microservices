@@ -46,6 +46,7 @@ ext {
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-actuator')
 	compile('org.springframework.cloud:spring-cloud-starter-config')
+    compile('org.springframework.cloud:spring-cloud-starter-oauth2')
 	compile('org.springframework.cloud:spring-cloud-starter-netflix-eureka-client')
 //	compile('org.springframework.cloud:spring-cloud-starter-zipkin') // zipkin server needed
 	compile('org.springframework.cloud:spring-cloud-starter-stream-rabbit')
